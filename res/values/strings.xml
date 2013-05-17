@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EJLookup</string>
+    <string name="text_paused_cellular">Хотите продолжить скачивание через сотовое соединение? В зависимости от вашего тарифа, это может повлечь дополнительные расходы.</string>
+    <string name="text_paused_cellular_2">Если вы решили не скачивать через сотовое соединение, скачивание начнётся автоматически, когда станет доступен wi-fi.</string>
+    <string name="text_button_resume_cellular">Продолжить скачивание</string>
+    <string name="text_button_wifi_settings">Настройки Wi-Fi</string>
+    <string name="text_verifying_download">Проверка словарей</string>
+    <string name="text_validation_complete">Словари скачаны успешно.\nНажмите ОК, чтобы выйти.</string>
+    <string name="text_validation_failed">Проверка словарей окончилась неудачей.</string>
+    <string name="text_button_pause">Приостановить скачивание</string>
+    <string name="text_button_resume">Продолжить скачивание</string>
+    <string name="text_button_cancel">Отменить</string>
+    <string name="text_button_cancel_verify">Подтверждение отмены</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="fontSize">
+        <item>Нормальный</item>
+        <item>Крупный</item>
+        <item>Максимальный</item>
+    </string-array>
+    <string-array name="fontSizeValues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>    
+</resources>

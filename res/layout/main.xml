@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/linearLayoutHorz">
+        <AutoCompleteTextView android:layout_height="wrap_content" android:layout_width="0dip" android:layout_weight="1" android:id="@+id/editQuery" android:imeOptions="actionSearch" android:singleLine="true"/>
+        <Button android:layout_height="wrap_content" android:id="@+id/buttonSearch" android:layout_width="wrap_content" android:onClick="searchClicked" android:text="@android:string/search_go"/>
+    </LinearLayout>
+    <ExpandableListView android:layout_height="wrap_content" android:layout_width="fill_parent" android:id="@+id/listResults"/>
+</LinearLayout>

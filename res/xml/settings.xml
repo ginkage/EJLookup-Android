@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Общие" android:key="general">
+        <ListPreference android:title="Размер шрифта" android:key="fontSize" android:entryValues="@array/fontSizeValues" android:entries="@array/fontSize" android:defaultValue="0" android:summary="Для планшетов рекомендуется использовать крупный шрифт"/>
+        <ListPreference android:key="limResult" android:entries="@array/maxResult" android:defaultValue="100" android:title="Максимум результатов" android:entryValues="@array/maxResultValues"/>
+        <ListPreference android:key="limSuggest" android:entries="@array/maxSuggest" android:defaultValue="10" android:title="Максимум подсказок" android:entryValues="@array/maxSuggestValues"/>
+        <ListPreference android:entryValues="@array/themeColorValues" android:entries="@array/themeColor" android:key="themeColor" android:title="Тема оформления" android:summary="Тёмный или светлый фон" android:defaultValue="0"/>
+        <CheckBoxPreference android:key="sugRoman" android:summary="Преобразовывать кану в латиницу" android:title="Подсказки в ромадзи" android:defaultValue="true"/>
+        
+    </PreferenceCategory><PreferenceCategory android:title="Словари" android:key="dict">
+        <Preference android:title="Скачать все словари" android:key="download" android:summary="Суммарно скачивается около 100 Мб, рекомендуется использовать WiFi!"/>
+    </PreferenceCategory>
+    
+</PreferenceScreen>
