@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TreeSet;
 
+import android.content.Context;
 import android.util.SparseBooleanArray;
 import android.util.SparseIntArray;
 
@@ -46,6 +47,37 @@ class DictionaryTraverse {
 //			"enamdict",
 //			"ginkage"
 		};
+
+    public static final String[] fileDesc = {
+            "Japanese-Russian electronic dictionary",
+            "Big Japanese-Russian Dictionary",
+            "Japanese-English electronic dictionary",
+            "Kanji information",
+            "Japanese/English Life Science",
+            "Glenn's Classical Japanese dictionary",
+            "Handbook of Japanese Compound Verbs",
+            "Computing and telecommunications glossary",
+            "Francis Bond's J/E Linguistics Dictionary",
+            "Japanese-Deutsche Dictionary",
+            "4-kanji ideomatic expressions and proverbs",
+            "Ron Schei's E/J Aviation Dictionary",
+            "Buddhism words and phrases",
+            "Engineering and physical sciences",
+            "Environmental terms glossary",
+            "Financial terms glossary",
+            "Forestry terms, English",
+            "Forestry terms, Spanish",
+            "Geological terminology",
+            "University of Washington Japanese-English Legal Glossary",
+            "Manufacturing terms",
+            "Adam Rice's business & marketing glossary lists",
+            "Jim Minor's Pulp & Paper Industry Glossary",
+            "Raphael Garrouty's compilation of constellation names",
+            "Gururaj Rao's Concrete Terminology Glossary"//,
+//			"j_places",
+//			"enamdict",
+//			"ginkage"
+    };
 
 	public static boolean Init(String expPath)
 	{
@@ -185,11 +217,12 @@ class DictionaryTraverse {
 		}
 	}
 
-	public static ArrayList<ResultLine> getLookupResults(String request)
+	public static ArrayList<ResultLine> getLookupResults(Context context, String request)
 	{
 		ArrayList<ResultLine> result = null;
 
-		maxres = Integer.parseInt(EJLookupActivity.getString("limResult", "100"));
+		maxres = Integer.parseInt(EJLookupActivity.getString(context.getString(R.string.setting_max_results), "100"));
+        String str_partial = context.getString(R.string.text_dictionary_partial);
 
 		char[] text = new char[request.length()];
 		request.getChars(0, request.length(), text, 0);
@@ -223,7 +256,7 @@ class DictionaryTraverse {
 		}
 
 		for (i = 0; i < fileList.length && result.size() < maxres; i++) {
-			String partName = fileList[i] + " (частично)";
+			String partName = fileList[i] + str_partial;
             for (String st : spartial[i])
                 if (result.size() < maxres)
 				    result.add(new ResultLine(st, partName));

@@ -126,8 +126,8 @@ public class EJLookupActivity extends Activity {
 			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
 				ExpandableListContextMenuInfo info = (ExpandableListContextMenuInfo)menuInfo;
 				if (ExpandableListView.getPackedPositionType(info.packedPosition) == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
-					menu.setHeaderTitle("EJLookup");
-					menu.add(0, v.getId(), 0, "Копировать");
+					menu.setHeaderTitle(getString(R.string.app_name));
+					menu.add(0, v.getId(), 0, getString(R.string.text_menu_copy));
 				}
 			}
 		});
@@ -176,7 +176,7 @@ public class EJLookupActivity extends Activity {
 				CharSequence paste = clipboard.getText();
 
 				if (paste == null || paste.length() == 0)
-					Toast.makeText(EJLookupActivity.this, "Буфер обмена пуст", Toast.LENGTH_LONG).show();
+					Toast.makeText(EJLookupActivity.this, getString(R.string.text_clipboard_empty), Toast.LENGTH_LONG).show();
 				else {
 					query.setText(paste);
 					query.setSelection(paste.length());
@@ -209,7 +209,7 @@ public class EJLookupActivity extends Activity {
 		if (storageManager.isObbMounted(expFile))
 			initPath = DictionaryTraverse.Init(storageManager.getMountedObbPath(expFile));
 		else if (waitMount == null) {
-			waitMount = ProgressDialog.show(this, "Загрузка словарей", "Подождите пожалуйста", true);
+			waitMount = ProgressDialog.show(this, getString(R.string.mount_dlg_text), getString(R.string.mount_dlg_head), true);
 			storageManager.mountObb(expFile, null, mStateListener);
 		}
 	}
@@ -275,14 +275,18 @@ public class EJLookupActivity extends Activity {
 			return createAboutDialog(this);
 		else if (id == ID_DIALOG_NODICT) {
 			final TextView message = new TextView(this);
-			final SpannableString s = new SpannableString("Словари не найдены!\n\nПопробуйте заново запустить приложение.\n");
-//			final SpannableString s = new SpannableString("Словари не найдены!\n\nЗайдите в настройки для скачивания словарей, либо скачайте их по адресу\nhttp://bit.ly/ejldic\nи распакуйте в директорию\n" + DictionaryTraverse.filePath);
+			final SpannableString s = new SpannableString(getString(R.string.text_dictionary_missing));
 			message.setPadding(5, 5, 5, 5);
 			message.setText(s);
 			message.setGravity(Gravity.CENTER);
-//			Linkify.addLinks(message, Linkify.ALL);
-			return new AlertDialog.Builder(this).setTitle("EJLookup").setCancelable(true).setIcon(R.drawable.icon).setPositiveButton(
-                    this.getString(android.R.string.ok), null).setView(message).create();
+
+			return new AlertDialog.Builder(this)
+                    .setTitle(getString(R.string.app_name))
+                    .setCancelable(true)
+                    .setIcon(R.drawable.icon)
+                    .setPositiveButton(getString(android.R.string.ok), null)
+                    .setView(message)
+                    .create();
 		}
 
 		return super.onCreateDialog(id);
@@ -300,9 +304,9 @@ public class EJLookupActivity extends Activity {
 			e.printStackTrace();
 		}
 
-		String aboutTitle = String.format("О программе %s", context.getString(R.string.app_name));
-		String versionString = String.format("Версия %s,\nGinKage (ginkage@yandex.ru)", versionInfo);
-		String aboutText = "Простой словарик Японского языка\n\nПри создании использовались данные MONASH и проекта Warodai,\nhttp://warodai.ru";
+		String aboutTitle = String.format(context.getString(R.string.about_dlg_title), context.getString(R.string.app_name));
+		String versionString = String.format(context.getString(R.string.about_dlg_version), versionInfo);
+		String aboutText = context.getString(R.string.about_dlg_sources);
  
 		final TextView message = new TextView(context);
 		final SpannableString s = new SpannableString(aboutText);
@@ -312,8 +316,13 @@ public class EJLookupActivity extends Activity {
 		message.setGravity(Gravity.CENTER);
 		Linkify.addLinks(message, Linkify.ALL);
 	 
-		return new AlertDialog.Builder(context).setTitle(aboutTitle).setCancelable(true).setIcon(R.drawable.icon).setPositiveButton(
-			 context.getString(android.R.string.ok), null).setView(message).create();
+		return new AlertDialog.Builder(context)
+                .setTitle(aboutTitle)
+                .setCancelable(true)
+                .setIcon(R.drawable.icon)
+                .setPositiveButton(context.getString(android.R.string.ok), null)
+                .setView(message)
+                .create();
 	}
 
 	@Override
@@ -330,11 +339,11 @@ public class EJLookupActivity extends Activity {
 
 	public void searchClicked(View view) {
 		if (!initPath || !storageManager.isObbMounted(expFile)) {
-			Toast.makeText(this, "Ошибка загрузки словарей!\nПопробуйте повторить попытку.", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, getString(R.string.text_mount_error), Toast.LENGTH_LONG).show();
 			Mount();
 		}
 		else if (query.getText().length() == 0) {
-			Toast.makeText(this, "Пожалуйста, введите запрос", Toast.LENGTH_LONG).show();
+			Toast.makeText(this, getString(R.string.text_query_missing), Toast.LENGTH_LONG).show();
 		}
 		else if (getResult == null) {
 			InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -361,7 +370,7 @@ public class EJLookupActivity extends Activity {
 		protected ArrayList<String> doInBackground(String... args) {
 			if (args != null) {
 				String request = args[0];
-				return Suggest.getLookupResults(request, this);
+				return Suggest.getLookupResults(EJLookupActivity.this, request, this);
 			} else {
 				return null;
 			}
@@ -375,7 +384,7 @@ public class EJLookupActivity extends Activity {
 		protected void onPostExecute(ArrayList<String> lines) {
 			if (lines != null) {
 				ArrayAdapter<String> suggest = new ArrayAdapter<String>(EJLookupActivity.this,
-						preferences.getString("themeColor", "0").equals("1") ? R.layout.list_item_light : R.layout.list_item_dark, lines);
+						preferences.getString(getString(R.string.setting_theme_color), "0").equals("1") ? R.layout.list_item_light : R.layout.list_item_dark, lines);
 				query.setAdapter(suggest);
 				query.showDropDown();
 			}
@@ -386,14 +395,27 @@ public class EJLookupActivity extends Activity {
 		private EJLookupActivity curContext;
 
 		@Override
-		protected ArrayList<ResultLine> doInBackground(String... args) {
-			if (args != null) {
-				String request = args[0];
-				ResultLine.StartFill();
-				return DictionaryTraverse.getLookupResults(request);
-			} else {
-				return null;
-			}
+		protected ArrayList<ResultLine> doInBackground(String... args)
+        {
+			if (args == null)
+                return null;
+
+            String request = args[0];
+
+            int font_size = 0;
+            String fsize = getString(getString(R.string.setting_font_size), "0");
+            if (fsize.equals("1"))
+                font_size = 1;
+            else if (fsize.equals("2"))
+                font_size = 2;
+
+            int theme_color = 0;
+            String theme = getString(getString(R.string.setting_theme_color), "0");
+            if (theme.equals("1"))
+                theme_color = 1;
+
+            ResultLine.StartFill(font_size, theme_color);
+            return DictionaryTraverse.getLookupResults(EJLookupActivity.this, request);
 		}
 
 		@Override
@@ -406,16 +428,18 @@ public class EJLookupActivity extends Activity {
 
 			if (curContext != null) {
 				if (lines == null)
-					Toast.makeText(getApplicationContext(), "Произошла непредвиденная ошибка", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), getString(R.string.text_error_unknown), Toast.LENGTH_LONG).show();
 				else if (lines.size() == 0) {
 					if (DictionaryTraverse.hasDicts)
-						Toast.makeText(getApplicationContext(), "Ничего не найдено", Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(), getString(R.string.text_found_nothing), Toast.LENGTH_LONG).show();
 					else
 						curContext.showDialog(ID_DIALOG_NODICT);
 				}
 				else {
 					if (lines.size() >= DictionaryTraverse.maxres)
-						Toast.makeText(getApplicationContext(), "Слишком много результатов, показаны первые " + DictionaryTraverse.maxres, Toast.LENGTH_LONG).show();
+						Toast.makeText(getApplicationContext(),
+                                String.format(getString(R.string.text_found_toomuch), DictionaryTraverse.maxres),
+                                Toast.LENGTH_LONG).show();
 
 					curContext.setResults();
 				}

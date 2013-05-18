@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
+import android.content.Context;
 import android.os.AsyncTask;
 
 class Suggest {
@@ -54,9 +55,12 @@ class Suggest {
         }
     }
 
-	public static ArrayList<String> getLookupResults(String request, AsyncTask<String, Integer, ArrayList<String>> task)
+	public static ArrayList<String> getLookupResults(Context context, String request, AsyncTask<String, Integer, ArrayList<String>> task)
 	{
 		ArrayList<String> result = null;
+
+        int maxsug = Integer.parseInt(EJLookupActivity.getString(context.getString(R.string.setting_max_suggest), "10"));
+        boolean romanize = EJLookupActivity.getBoolean(context.getString(R.string.setting_suggest_romaji), true);
 
 		char[] text = new char[request.length()];
 		request.getChars(0, request.length(), text, 0);
@@ -98,8 +102,6 @@ class Suggest {
 
 			HashSet<String> duplicate = new HashSet<String>();
 			String begin = (last >= 0 ? request.substring(0, last) : "");
-			int maxsug = Integer.parseInt(EJLookupActivity.getString("limSuggest", "10"));
-			boolean romanize = EJLookupActivity.getBoolean("sugRoman", true);
             for (Pair pit : freq)
 			    if (result.size() < maxsug) {
                     String str = pit.line;

@@ -17,20 +17,10 @@ class ResultLine {
 	private static int font_size;
     public static int theme_color;
 
-	public static void StartFill()
+	public static void StartFill(int fontSize, int themeColor)
 	{
-		font_size = 0;
-		String fsize = EJLookupActivity.getString("fontSize", "0");
-		if (fsize.equals("1"))
-			font_size = 1;
-		else if (fsize.equals("2"))
-			font_size = 2;
-
-		theme_color = 0;
-		String theme = EJLookupActivity.getString("themeColor", "0");
-		if (theme.equals("1"))
-			theme_color = 1;
-
+		font_size = fontSize;
+        theme_color = themeColor;
 		rescount = 0;
 		resmax = 250;
 	}

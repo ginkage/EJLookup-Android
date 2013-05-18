@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_marginLeft="5dp"
-                    android:text="0MB / 0MB" >
+                    android:text="@string/text_progress_zero" >
                 </TextView>
 
                 <TextView
@@ -47,7 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignRight="@+id/progressBar"
-                    android:text="0%" />
+                    android:text="@string/text_progress_zero_percent" />
 
                 <ProgressBar
                     android:id="@+id/progressBar"

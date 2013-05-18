@@ -19,8 +19,8 @@
                 <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Settings" android:label="Настройки" />
-        <activity android:name=".DictionaryDownloaderActivity" android:label="Скачать словари" />
+        <activity android:name=".Settings" android:label="@string/text_menu_settings" />
+        <activity android:name=".DictionaryDownloaderActivity" android:label="@string/text_dictionary_download" />
         <service android:name=".DictionaryDownloaderService" />
         <receiver android:name=".DictionaryAlarmReceiver" />
 

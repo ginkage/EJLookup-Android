@@ -270,9 +270,10 @@ public class DictionaryDownloaderActivity extends Activity implements IDownloade
                 Intent launchIntent = DictionaryDownloaderActivity.this
                         .getIntent();
                 Intent intentToLaunchThisActivityFromNotification = new Intent(
-                        DictionaryDownloaderActivity
-                        .this, DictionaryDownloaderActivity.this.getClass());
-                intentToLaunchThisActivityFromNotification.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |
+                        DictionaryDownloaderActivity.this,
+                        DictionaryDownloaderActivity.this.getClass());
+                intentToLaunchThisActivityFromNotification.setFlags(
+                        Intent.FLAG_ACTIVITY_NEW_TASK |
                         Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intentToLaunchThisActivityFromNotification.setAction(launchIntent.getAction());
 
@@ -427,9 +428,9 @@ public class DictionaryDownloaderActivity extends Activity implements IDownloade
      * sent from the downloader service.
      */
     public void onDownloadProgress(DownloadProgressInfo progress) {
-        mAverageSpeed.setText(String.format("%1$s KB/s",
+        mAverageSpeed.setText(String.format(getString(R.string.kilobytes_per_second),
                 Helpers.getSpeedString(progress.mCurrentSpeed)));
-        mTimeRemaining.setText(String.format("Time remaining: %1$s",
+        mTimeRemaining.setText(String.format(getString(R.string.time_remaining),
                 Helpers.getTimeRemaining(progress.mTimeRemaining)));
 
 //        progress.mOverallTotal = progress.mOverallTotal;
