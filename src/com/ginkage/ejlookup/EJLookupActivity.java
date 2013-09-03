@@ -1,7 +1,9 @@
 package com.ginkage.ejlookup;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
+import android.content.res.Configuration;
 import com.google.android.vending.expansion.downloader.Helpers;
 
 import android.app.Activity;
@@ -99,6 +101,15 @@ public class EJLookupActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		//Log.i("activity", "onCreate");
 		super.onCreate(savedInstanceState);
+
+		preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+		Locale locale = new Locale(getString(getString(R.string.setting_language), Locale.getDefault().getLanguage()));
+		Locale.setDefault(locale);
+		Configuration config = new Configuration();
+		config.locale = locale;
+		getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.main);
 
@@ -117,10 +128,9 @@ public class EJLookupActivity extends Activity {
 		storageManager = (StorageManager) getSystemService(STORAGE_SERVICE);
 		clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
-		preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		query = (AutoCompleteTextView)findViewById(R.id.editQuery);
 		results = (ExpandableListView)findViewById(R.id.listResults);
-        Button search = (Button)findViewById(R.id.buttonSearch);
+		Button search = (Button)findViewById(R.id.buttonSearch);
 
 		results.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
 			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
@@ -190,8 +200,60 @@ public class EJLookupActivity extends Activity {
 
 	private final OnObbStateChangeListener mStateListener = new OnObbStateChangeListener() {
 		public void onObbStateChange(String path, int state) {
-			if (state == MOUNTED)
-				initPath = DictionaryTraverse.Init(storageManager.getMountedObbPath(path));
+			switch (state) {
+				case MOUNTED:
+/*					Toast.makeText(getApplicationContext(),
+						"The OBB container is now mounted and ready for use.",
+						Toast.LENGTH_LONG).show();
+*/
+					initPath = DictionaryTraverse.Init(storageManager.getMountedObbPath(path));
+					break;
+
+				case UNMOUNTED:
+/*					Toast.makeText(getApplicationContext(),
+						"The OBB container is now unmounted and not usable.",
+						Toast.LENGTH_LONG).show();
+*/					break;
+
+				case ERROR_INTERNAL:
+/*					Toast.makeText(getApplicationContext(),
+						"There was an internal system error encountered while trying to mount the OBB.",
+						Toast.LENGTH_LONG).show();
+*/					break;
+
+				case ERROR_COULD_NOT_MOUNT:
+/*					Toast.makeText(getApplicationContext(),
+						"The OBB could not be mounted by the system.",
+						Toast.LENGTH_LONG).show();
+*/					break;
+
+				case ERROR_COULD_NOT_UNMOUNT:
+/*					Toast.makeText(getApplicationContext(),
+						"The OBB could not be unmounted.",
+						Toast.LENGTH_LONG).show();
+*/					break;
+
+				case ERROR_NOT_MOUNTED:
+/*					Toast.makeText(getApplicationContext(),
+						"A call was made to unmount the OBB when it was not mounted.",
+						Toast.LENGTH_LONG).show();
+*/					break;
+
+				case ERROR_ALREADY_MOUNTED:
+/*					Toast.makeText(getApplicationContext(),
+						"The OBB has already been mounted.",
+						Toast.LENGTH_LONG).show();
+*/					break;
+
+				case ERROR_PERMISSION_DENIED:
+/*					Toast.makeText(getApplicationContext(),
+						"The current application does not have permission to use this OBB.",
+						Toast.LENGTH_LONG).show();
+*/					break;
+
+				default:
+					break;
+			}
 
 			if (waitMount != null) {
 				waitMount.dismiss();
@@ -281,12 +343,12 @@ public class EJLookupActivity extends Activity {
 			message.setGravity(Gravity.CENTER);
 
 			return new AlertDialog.Builder(this)
-                    .setTitle(getString(R.string.app_name))
-                    .setCancelable(true)
-                    .setIcon(R.drawable.icon)
-                    .setPositiveButton(getString(android.R.string.ok), null)
-                    .setView(message)
-                    .create();
+					.setTitle(getString(R.string.app_name))
+					.setCancelable(true)
+					.setIcon(R.drawable.icon)
+					.setPositiveButton(getString(android.R.string.ok), null)
+					.setView(message)
+					.create();
 		}
 
 		return super.onCreateDialog(id);
@@ -317,12 +379,12 @@ public class EJLookupActivity extends Activity {
 		Linkify.addLinks(message, Linkify.ALL);
 	 
 		return new AlertDialog.Builder(context)
-                .setTitle(aboutTitle)
-                .setCancelable(true)
-                .setIcon(R.drawable.icon)
-                .setPositiveButton(context.getString(android.R.string.ok), null)
-                .setView(message)
-                .create();
+				.setTitle(aboutTitle)
+				.setCancelable(true)
+				.setIcon(R.drawable.icon)
+				.setPositiveButton(context.getString(android.R.string.ok), null)
+				.setView(message)
+				.create();
 	}
 
 	@Override
@@ -396,26 +458,26 @@ public class EJLookupActivity extends Activity {
 
 		@Override
 		protected ArrayList<ResultLine> doInBackground(String... args)
-        {
+		{
 			if (args == null)
-                return null;
+				return null;
 
-            String request = args[0];
+			String request = args[0];
 
-            int font_size = 0;
-            String fsize = getString(getString(R.string.setting_font_size), "0");
-            if (fsize.equals("1"))
-                font_size = 1;
-            else if (fsize.equals("2"))
-                font_size = 2;
+			int font_size = 0;
+			String fsize = getString(getString(R.string.setting_font_size), "0");
+			if (fsize.equals("1"))
+				font_size = 1;
+			else if (fsize.equals("2"))
+				font_size = 2;
 
-            int theme_color = 0;
-            String theme = getString(getString(R.string.setting_theme_color), "0");
-            if (theme.equals("1"))
-                theme_color = 1;
+			int theme_color = 0;
+			String theme = getString(getString(R.string.setting_theme_color), "0");
+			if (theme.equals("1"))
+				theme_color = 1;
 
-            ResultLine.StartFill(font_size, theme_color);
-            return DictionaryTraverse.getLookupResults(EJLookupActivity.this, request);
+			ResultLine.StartFill(font_size, theme_color);
+			return DictionaryTraverse.getLookupResults(EJLookupActivity.this, request);
 		}
 
 		@Override
@@ -438,8 +500,8 @@ public class EJLookupActivity extends Activity {
 				else {
 					if (lines.size() >= DictionaryTraverse.maxres)
 						Toast.makeText(getApplicationContext(),
-                                String.format(getString(R.string.text_found_toomuch), DictionaryTraverse.maxres),
-                                Toast.LENGTH_LONG).show();
+								String.format(getString(R.string.text_found_toomuch), DictionaryTraverse.maxres),
+								Toast.LENGTH_LONG).show();
 
 					curContext.setResults();
 				}
