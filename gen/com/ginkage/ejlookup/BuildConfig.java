@@ -1,8 +1,8 @@
 /*___Generated_by_IDEA___*/
 
-/** Automatically generated file. DO NOT MODIFY */
 package com.ginkage.ejlookup;
 
+/* This stub is only used by the IDE. It is NOT the BuildConfig class actually packed into the APK */
 public final class BuildConfig {
-    public final static boolean DEBUG = false;
+  public final static boolean DEBUG = Boolean.parseBoolean(null);
 }

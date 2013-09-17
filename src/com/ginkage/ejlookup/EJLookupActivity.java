@@ -84,6 +84,12 @@ public class EJLookupActivity extends Activity {
 	{
 		return preferences.getString(key, defValue);
 	}
+
+	public static void checkPreferences(Context context)
+	{
+		if (preferences == null)
+			preferences = PreferenceManager.getDefaultSharedPreferences(context);
+	}
 	
 	private void setResults()
 	{
