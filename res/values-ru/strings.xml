@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EJLookup</string>
+    <string name="text_paused_cellular">Хотите продолжить скачивание через сотовое соединение? В зависимости от вашего тарифа, это может повлечь дополнительные расходы.</string>
+    <string name="text_paused_cellular_2">Если вы решили не скачивать через сотовое соединение, скачивание начнётся автоматически, когда станет доступен wi-fi.</string>
+    <string name="text_button_resume_cellular">Продолжить скачивание</string>
+    <string name="text_button_wifi_settings">Настройки Wi-Fi</string>
+    <string name="text_verifying_download">Проверка словарей</string>
+    <string name="text_validation_complete">Словари скачаны успешно.\nНажмите ОК, чтобы выйти.</string>
+    <string name="text_validation_failed">Проверка словарей окончилась неудачей.</string>
+    <string name="text_button_pause">Приостановить скачивание</string>
+    <string name="text_button_resume">Продолжить скачивание</string>
+    <string name="text_button_cancel">Отменить</string>
+    <string name="text_button_cancel_verify">Подтверждение отмены</string>
+
+    <string name="text_menu_settings">Настройки</string>
+    <string name="text_menu_about">О программе</string>
+    <string name="text_menu_copy">Копировать</string>
+
+    <string name="notification_download_complete">Загрузка завершена</string>
+    <string name="notification_download_failed">Ошибка загрузки</string>
+    <string name="state_unknown">Загрузка начинается…</string>
+    <string name="state_idle">Ожидание начала загрузки</string>
+    <string name="state_fetching_url">Поиск ресурсов для загрузки</string>
+    <string name="state_connecting">Подключение к серверу</string>
+    <string name="state_downloading">Загрузка ресурсов</string>
+    <string name="state_completed">Загрузка завершена</string>
+    <string name="state_paused_network_unavailable">Загрузка приостановлена, т.к. сеть недоступна</string>
+    <string name="state_paused_network_setup_failure">Загрузка приостановлена. Проверьте работоспособность сайта в браузере</string>
+    <string name="state_paused_by_request">Загрузка приостановлена</string>
+    <string name="state_paused_wifi_unavailable">Загрузка приостановлена, т.к. WiFi недоступен</string>
+    <string name="state_paused_wifi_disabled">Загрузка приостановлена, т.к. WiFi выключен</string>
+    <string name="state_paused_roaming">Загрузка приостановлена, т.к. вы находитесь в роуминге</string>
+    <string name="state_paused_sdcard_unavailable">Загрузка приостановлена, т.к. внешняя память недоступна</string>
+    <string name="state_failed_unlicensed">Загрузка не выполнена, т.к. приложение не было приобретено</string>
+    <string name="state_failed_fetching_url">Загрузка не выполнена, т.к. ресурс не был найден</string>
+    <string name="state_failed_sdcard_full">Загрузка не выполнена, т.к. внешняя память заполнена</string>
+    <string name="state_failed_cancelled">Загрузка отменена</string>
+    <string name="state_failed">Ошибка загрузки</string>
+    <string name="kilobytes_per_second">%1$s KB/s</string>
+    <string name="time_remaining">Осталось: %1$s</string>
+    <string name="time_remaining_notification">%1$s осталось</string>
+    <string name="text_progress_zero">0MB / 0MB</string>
+    <string name="text_progress_zero_percent">0%</string>
+
+    <string name="setting_title_general">Общие</string>
+    <string name="setting_title_font_size">Размер шрифта</string>
+    <string name="setting_summary_font_size">Для планшетов рекомендуется использовать крупный шрифт</string>
+    <string name="setting_title_max_results">Максимум результатов</string>
+    <string name="setting_title_max_suggest">Максимум подсказок</string>
+    <string name="setting_title_theme_color">Тема оформления</string>
+    <string name="setting_summary_theme_color">Тёмный или светлый фон</string>
+    <string name="setting_title_suggest_romaji">Подсказки в ромадзи</string>
+    <string name="setting_summary_suggest_romaji">Преобразовывать кану в латиницу</string>
+    <string name="setting_title_dictionaries">Словари</string>
+    <string name="setting_title_language">Язык интерфейса</string>
+    <string name="setting_summary_language">Требуется перезапуск приложения</string>
+
+    <string name="text_clipboard_empty">Буфер обмена пуст</string>
+    <string name="mount_dlg_text">Загрузка словарей</string>
+    <string name="mount_dlg_head">Подождите пожалуйста</string>
+    <string name="text_dictionary_missing">Словари не найдены!\n\nПопробуйте заново запустить приложение.</string>
+    <string name="about_dlg_title">О программе %s</string>
+    <string name="about_dlg_version">Версия %s,\nGinKage (ginkage@yandex.ru)</string>
+    <string name="about_dlg_sources">Простой словарик Японского языка\n\nПри создании использовались данные MONASH и проекта Warodai,\nhttp://warodai.ru</string>
+    <string name="text_mount_error">Ошибка загрузки словарей!\nПопробуйте повторить попытку.</string>
+    <string name="text_query_missing">Пожалуйста, введите запрос</string>
+    <string name="text_error_unknown">Произошла непредвиденная ошибка</string>
+    <string name="text_found_nothing">Ничего не найдено</string>
+    <string name="text_found_toomuch">Слишком много результатов, показаны первые %d</string>
+    <string name="text_dictionary_partial">(частично)</string>
+    <string name="text_dictionary_download">Скачать словари</string>
+</resources>

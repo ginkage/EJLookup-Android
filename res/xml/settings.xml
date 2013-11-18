@@ -6,6 +6,7 @@
         <ListPreference android:key="@string/setting_max_results" android:entries="@array/maxResult" android:defaultValue="100" android:title="@string/setting_title_max_results" android:entryValues="@array/maxResultValues"/>
         <ListPreference android:key="@string/setting_max_suggest" android:entries="@array/maxSuggest" android:defaultValue="10" android:title="@string/setting_title_max_suggest" android:entryValues="@array/maxSuggestValues"/>
         <ListPreference android:key="@string/setting_theme_color" android:entryValues="@array/themeColorValues" android:entries="@array/themeColor" android:title="@string/setting_title_theme_color" android:summary="@string/setting_summary_theme_color" android:defaultValue="0"/>
+        <ListPreference android:key="@string/setting_language" android:entryValues="@array/languageValues" android:entries="@array/language" android:title="@string/setting_title_language" android:summary="@string/setting_summary_language" android:defaultValue="0"/>
         <CheckBoxPreference android:key="@string/setting_suggest_romaji" android:summary="@string/setting_summary_suggest_romaji" android:title="@string/setting_title_suggest_romaji" android:defaultValue="true"/>
     </PreferenceCategory>
 
