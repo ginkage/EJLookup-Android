@@ -1,32 +1,9 @@
 package com.ginkage.ejlookup;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceCategory;
-import android.preference.PreferenceScreen;
-import android.widget.Toast;
-
 
 public class Settings extends PreferenceActivity {
 	@Override

@@ -2,7 +2,6 @@ package com.ginkage.ejlookup;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import android.view.Gravity;
 import android.view.View;

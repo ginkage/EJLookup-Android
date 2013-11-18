@@ -64,7 +64,7 @@
     <string name="about_dlg_sources">Simple Japanese dictionary\n\nThis application was created using data from MONASH and Warodai project,\nhttp://warodai.ru</string>
     <string name="text_mount_error">Error loading dictionaries!\nTry restarting.</string>
     <string name="text_query_missing">Please enter query</string>
-    <string name="text_error_unknown">Unexpected error occured</string>
+    <string name="text_error_unknown">Unexpected error occurred</string>
     <string name="text_found_nothing">Nothing found</string>
     <string name="text_found_toomuch">Too many results, showing first %d</string>
     <string name="text_dictionary_partial">(partial)</string>

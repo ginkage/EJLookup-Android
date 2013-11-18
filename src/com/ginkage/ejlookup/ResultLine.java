@@ -1,7 +1,6 @@
 package com.ginkage.ejlookup;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import android.graphics.Color;
 import android.text.SpannableString;
