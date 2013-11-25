@@ -62,6 +62,7 @@ public class EJLookupActivity extends Activity {
 	private String expFile = null;
 	private ProgressDialog waitMount = null;
 	private boolean initPath = false;
+	private boolean bugKitKat = false;
 
 	private boolean expansionFilesDelivered() {
 		expFile = null;
@@ -165,7 +166,7 @@ public class EJLookupActivity extends Activity {
 
 		query.addTextChangedListener(new TextWatcher() {
 			public void afterTextChanged(Editable s) {
-				if (!initPath || !storageManager.isObbMounted(expFile)) {
+				if (!initPath || (!bugKitKat && !storageManager.isObbMounted(expFile))) {
 					Mount();
 					return;
 				}
@@ -212,7 +213,7 @@ public class EJLookupActivity extends Activity {
 						"The OBB container is now mounted and ready for use.",
 						Toast.LENGTH_LONG).show();
 */
-					initPath = DictionaryTraverse.Init(storageManager.getMountedObbPath(path));
+					initPath = DictionaryTraverse.Init(storageManager.getMountedObbPath(path), false);
 					break;
 
 				case UNMOUNTED:
@@ -228,6 +229,7 @@ public class EJLookupActivity extends Activity {
 */					break;
 
 				case ERROR_COULD_NOT_MOUNT:
+					bugKitKat = true;
 /*					Toast.makeText(getApplicationContext(),
 						"The OBB could not be mounted by the system.",
 						Toast.LENGTH_LONG).show();
@@ -274,8 +276,8 @@ public class EJLookupActivity extends Activity {
 		initPath = false;
 		keepMount = false;
 
-		if (storageManager.isObbMounted(expFile))
-			initPath = DictionaryTraverse.Init(storageManager.getMountedObbPath(expFile));
+		if (storageManager.isObbMounted(expFile) || bugKitKat)
+			initPath = DictionaryTraverse.Init(bugKitKat ? expFile : storageManager.getMountedObbPath(expFile), bugKitKat);
 		else if (waitMount == null) {
 			waitMount = ProgressDialog.show(this, getString(R.string.mount_dlg_text), getString(R.string.mount_dlg_head), true);
 			storageManager.mountObb(expFile, null, mStateListener);
@@ -406,7 +408,7 @@ public class EJLookupActivity extends Activity {
 	}
 
 	public void searchClicked(View view) {
-		if (!initPath || !storageManager.isObbMounted(expFile)) {
+		if (!initPath || (!bugKitKat && !storageManager.isObbMounted(expFile))) {
 			Toast.makeText(this, getString(R.string.text_mount_error), Toast.LENGTH_LONG).show();
 			Mount();
 		}

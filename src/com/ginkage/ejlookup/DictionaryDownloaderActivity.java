@@ -271,7 +271,7 @@ public class DictionaryDownloaderActivity extends Activity implements IDownloade
                         .getIntent();
                 Intent intentToLaunchThisActivityFromNotification = new Intent(
                         DictionaryDownloaderActivity.this,
-                        DictionaryDownloaderActivity.this.getClass());
+                        ((Object)DictionaryDownloaderActivity.this).getClass());
                 intentToLaunchThisActivityFromNotification.setFlags(
                         Intent.FLAG_ACTIVITY_NEW_TASK |
                         Intent.FLAG_ACTIVITY_CLEAR_TOP);
