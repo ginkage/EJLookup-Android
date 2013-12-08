@@ -192,6 +192,7 @@ class DictionaryTraverse {
 				idx = dic = new File(filePath);
 				idxPos = obbPos[fileNum][0];
 				utfPos = obbPos[fileNum][1];
+                hasDicts = true;
 			}
 			else {
 				idx = new File(filePath + fileName + ".idx");

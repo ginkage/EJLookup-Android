@@ -16,7 +16,7 @@ public class Settings extends PreferenceActivity {
 
 		int i = 0;
 		for (String fileName : DictionaryTraverse.fileList) {
-			boolean exists = DictionaryTraverse.checkExists(fileName);
+			boolean exists = DictionaryTraverse.checkExists(fileName) || DictionaryTraverse.bugKitKat;
 			boolean checked = EJLookupActivity.getBoolean(fileName, true);
 
 			CheckBoxPreference cb = new CheckBoxPreference(this);
